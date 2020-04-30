@@ -8,6 +8,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class Driver {
 
+    //same for everyone
     private static ThreadLocal<WebDriver> driverPool = new ThreadLocal<>();
 
     //so no one can create object of Driver class
@@ -16,8 +17,9 @@ public class Driver {
 
     }
 
-    /**synchronized makes method thread safe. It ensures that only 1 thread can use it at the time.
-     *
+    /**
+     * synchronized makes method thread safe. It ensures that only 1 thread can use it at the time.
+     * <p>
      * Thread safety reduces performance but it makes everything safe.
      *
      * @return
@@ -28,6 +30,11 @@ public class Driver {
         if (driverPool.get() == null) {
             //specify browser type in configuration.properties file
             String browser = ConfigurationReader.getProperty("browser").toLowerCase();
+            // -Dbrowser=firefox
+            if (System.getProperty("browser") != null) {
+                browser = System.getProperty("browser");
+            }
+
             switch (browser) {
                 case "chrome":
                     WebDriverManager.chromedriver().setup();
@@ -53,8 +60,9 @@ public class Driver {
         return driverPool.get();
     }
 
-    /**synchronized makes method thread safe. It ensures that only 1 thread can use it at the time.
-     *
+    /**
+     * synchronized makes method thread safe. It ensures that only 1 thread can use it at the time.
+     * <p>
      * Thread safety reduces performance but it makes everything safe.
      *
      * @return

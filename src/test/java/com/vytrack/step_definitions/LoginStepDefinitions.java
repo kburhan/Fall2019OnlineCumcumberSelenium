@@ -8,14 +8,19 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
-
 public class LoginStepDefinitions {
     LoginPage loginPage = new LoginPage();
 
     @Given("user is on the login page")
     public void user_is_on_the_login_page() {
         System.out.println("Open login page");
-        String URL = ConfigurationReader.getProperty("qa1");
+        // -Denv=qa1, -Denv=qa2, -Denv=qa3
+        String env = "qa2";
+        if (System.getProperty("env") != null) {
+            env = System.getProperty("env");
+        }
+        String URL = ConfigurationReader.getProperty(env);
+        System.out.println("URL :: " + URL);
         Driver.getDriver().get(URL);
     }
 
