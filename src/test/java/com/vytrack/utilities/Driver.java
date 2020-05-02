@@ -58,7 +58,7 @@ public class Driver {
                     break;
                 case "chrome-remote":
                     try{
-                        URL url = new URL ("http://3.87.215.206::4444/wd/hub");
+                        URL url = new URL ("http://52.91.206.100:4444/wd/hub");
                         DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
                         desiredCapabilities.setBrowserName(BrowserType.CHROME);
                         desiredCapabilities.setPlatform(Platform.ANY);
